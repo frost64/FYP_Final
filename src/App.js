@@ -15,65 +15,81 @@ function App() {
   const [batteryChecked, setbatteryChecked] = useState(false);
   const [cameraChecked, setcameraChecked] = useState(false);
   const [storageChecked, setstorageChecked] = useState(false);
+  const [datax, setdatax] = useState(objdata);
   const [data2, setdata2] = useState(objdata);
   useEffect(() => {
-    let newdata = [];
-
     if (cameraChecked) {
       console.log("camera is cheaced");
-      newdata = data2
-        .sort((a, b) =>
-          a.camera_sum > b.camera_sum ? 1 : b.camera_sum > a.camera_sum ? -1 : 0
-        )
-        .reverse();
-      setdata2(newdata);
+      setdatax(
+        data2
+          .sort((a, b) =>
+            a.camera_sum > b.camera_sum
+              ? 1
+              : b.camera_sum > a.camera_sum
+              ? -1
+              : 0
+          )
+          .reverse()
+      );
+      console.log(datax);
     }
-
+  }, [cameraChecked]);
+  useEffect(() => {
     if (displayChecked) {
       console.log("display is cheaced");
-      newdata = data2
-        .sort((a, b) =>
-          a.display_sum > b.display_sum
-            ? 1
-            : b.display_sum > a.display_sum
-            ? -1
-            : 0
-        )
-        .reverse();
-
-      setdata2(newdata);
+      setdatax(
+        data2
+          .sort((a, b) =>
+            a.display_sum > b.display_sum
+              ? 1
+              : b.display_sum > a.display_sum
+              ? -1
+              : 0
+          )
+          .reverse()
+      );
+      console.log(datax);
     }
+  }, [displayChecked]);
+  useEffect(() => {
     if (storageChecked) {
       console.log("storage is cheaced");
 
-      newdata = data2
-        .sort((a, b) =>
-          a.storage_sum > b.storage_sum
-            ? 1
-            : b.storage_sum > a.storage_sum
-            ? -1
-            : 0
-        )
-        .reverse();
-
-      setdata2(newdata);
+      setdatax(
+        data2
+          .sort((a, b) =>
+            a.storage_sum > b.storage_sum
+              ? 1
+              : b.storage_sum > a.storage_sum
+              ? -1
+              : 0
+          )
+          .reverse()
+      );
+      console.log(datax);
     }
+  }, [storageChecked]);
+  useEffect(() => {
     if (batteryChecked) {
       console.log("batter is cheaced");
 
-      newdata = data2
-        .sort((a, b) =>
-          a.battery_sum > b.battery_sum
-            ? 1
-            : b.battery_sum > a.battery_sum
-            ? -1
-            : 0
-        )
-        .reverse();
-      setdata2(newdata);
+      setdatax(
+        data2
+          .sort((a, b) =>
+            a.battery_sum > b.battery_sum
+              ? 1
+              : b.battery_sum > a.battery_sum
+              ? -1
+              : 0
+          )
+          .reverse()
+      );
+      console.log(datax);
     }
-  }, [batteryChecked, storageChecked, cameraChecked, displayChecked]);
-
+  }, [batteryChecked]);
+  useEffect(() => {
+    setdata2(datax);
+  }, [datax]);
   const filter = (e) => {
     const keyword = e.target.value;
 
